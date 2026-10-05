@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Counselling System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .field {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .recommendation {
+            background-color: white;
+            padding: 15px;
+            border-left: 5px solid #1565c0;
+            margin-top: 15px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 Student Counselling System</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Counselling Application
+    </p>
+
+
+    <h3>Student Personal Details</h3>
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Student Name</label>
+
+            <input type="text"
+                   id="studentName"
+                   placeholder="Enter student name">
+
+        </div>
+
+        <div class="field">
+
+            <label>Age</label>
+
+            <input type="number"
+                   id="age"
+                   min="1"
+                   max="100"
+                   placeholder="Enter age">
+
+        </div>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Address</label>
+
+        <textarea id="address"
+                  placeholder="Enter complete address"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Phone Number</label>
+
+        <input type="tel"
+               id="phone"
+               placeholder="Enter phone number">
+
+    </div>
+
+
+    <h3>Academic Details</h3>
+
+    <div class="field">
+
+        <label>Subjects Studied</label>
+
+        <textarea id="subjects"
+                  placeholder="Example: Mathematics, Physics, Computer Science"></textarea>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Year of Passing</label>
+
+            <select id="passingYear">
+
+                <option value="">Select Year</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+                <option>2027</option>
+                <option>2028</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Percentage of Marks</label>
+
+            <input type="number"
+                   id="percentage"
+                   min="0"
+                   max="100"
+                   step="0.01"
+                   placeholder="Enter percentage">
+
+        </div>
+
+    </div>
+
+
+    <h3>Career Interest</h3>
+
+    <div class="field">
+
+        <label>Domain Interest</label>
+
+        <select id="domain">
+
+            <option value="">
+                Select Domain
+            </option>
+
+            <option>Artificial Intelligence & Machine Learning</option>
+            <option>Data Science</option>
+            <option>Web Development</option>
+            <option>Cyber Security</option>
+            <option>Cloud Computing</option>
+            <option>Software Development</option>
+            <option>Electronics</option>
+            <option>Business & Management</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Counselling Preference</label>
+
+        <select id="preference">
+
+            <option>Higher Studies</option>
+            <option>Job / Career</option>
+            <option>Entrepreneurship</option>
+            <option>Skill Development</option>
+
+        </select>
+
+    </div>
+
+
+    <button onclick="startCounselling()">
+        START COUNSELLING
+    </button>
+
+
+    <div id="result">
+
+        <h3>📋 Counselling Report</h3>
+
+        <p>
+            <b>Student Name:</b>
+            <span id="resultName"></span>
+        </p>
+
+        <p>
+            <b>Age:</b>
+            <span id="resultAge"></span>
+        </p>
+
+        <p>
+            <b>Address:</b>
+            <span id="resultAddress"></span>
+        </p>
+
+        <p>
+            <b>Phone:</b>
+            <span id="resultPhone"></span>
+        </p>
+
+        <p>
+            <b>Subjects Studied:</b>
+            <span id="resultSubjects"></span>
+        </p>
+
+        <p>
+            <b>Year of Passing:</b>
+            <span id="resultYear"></span>
+        </p>
+
+        <p>
+            <b>Percentage:</b>
+            <span id="resultPercentage"></span>%
+        </p>
+
+        <p>
+            <b>Domain Interest:</b>
+            <span id="resultDomain"></span>
+        </p>
+
+        <p>
+            <b>Counselling Preference:</b>
+            <span id="resultPreference"></span>
+        </p>
+
+
+        <div class="recommendation">
+
+            <h3>Career Recommendation</h3>
+
+            <p id="recommendation"></p>
+
+        </div>
+
+
+        <p class="success">
+            ✓ Counselling details submitted successfully!
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function startCounselling() {
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let age =
+        document.getElementById("age").value;
+
+    let address =
+        document.getElementById("address").value;
+
+    let phone =
+        document.getElementById("phone").value;
+
+    let subjects =
+        document.getElementById("subjects").value;
+
+    let year =
+        document.getElementById("passingYear").value;
+
+    let percentage =
+        Number(document.getElementById("percentage").value);
+
+    let domain =
+        document.getElementById("domain").value;
+
+    let preference =
+        document.getElementById("preference").value;
+
+
+    if (name == "") {
+
+        alert("Please enter student name.");
+
+        return;
+    }
+
+
+    if (age == "") {
+
+        alert("Please enter age.");
+
+        return;
+    }
+
+
+    if (address == "") {
+
+        alert("Please enter address.");
+
+        return;
+    }
+
+
+    if (phone == "") {
+
+        alert("Please enter phone number.");
+
+        return;
+    }
+
+
+    if (subjects == "") {
+
+        alert("Please enter subjects studied.");
+
+        return;
+    }
+
+
+    if (year == "") {
+
+        alert("Please select year of passing.");
+
+        return;
+    }
+
+
+    if (percentage < 0 || percentage > 100) {
+
+        alert("Percentage must be between 0 and 100.");
+
+        return;
+    }
+
+
+    if (domain == "") {
+
+        alert("Please select your domain interest.");
+
+        return;
+    }
+
+
+    let recommendation;
+
+
+    if (domain ==
+        "Artificial Intelligence & Machine Learning") {
+
+        recommendation =
+            "You can explore AI and ML careers such as Machine Learning Engineer, AI Engineer, Data Scientist and AI Researcher.";
+
+    }
+
+    else if (domain ==
+        "Data Science") {
+
+        recommendation =
+            "You can explore Data Analyst, Data Scientist, Business Analyst and Machine Learning careers.";
+
+    }
+
+    else if (domain ==
+        "Web Development") {
+
+        recommendation =
+            "You can explore Front-End Developer, Back-End Developer and Full-Stack Developer careers.";
+
+    }
+
+    else if (domain ==
+        "Cyber Security") {
+
+        recommendation =
+            "You can explore Cyber Security Analyst, Ethical Hacker, Security Engineer and SOC Analyst careers.";
+
+    }
+
+    else if (domain ==
+        "Cloud Computing") {
+
+        recommendation =
+            "You can explore Cloud Engineer, Cloud Administrator, DevOps Engineer and Cloud Architect careers.";
+
+    }
+
+    else if (domain ==
+        "Software Development") {
+
+        recommendation =
+            "You can explore Software Developer, Application Developer and Full-Stack Developer careers.";
+
+    }
+
+    else if (domain ==
+        "Electronics") {
+
+        recommendation =
+            "You can explore Embedded Systems, VLSI, IoT and Electronics Engineering careers.";
+
+    }
+
+    else {
+
+        recommendation =
+            "You can explore management, entrepreneurship and business-related career opportunities.";
+
+    }
+
+
+    if (percentage >= 80) {
+
+        recommendation +=
+            " Your academic performance is strong, so you can also consider higher studies and specialized certifications.";
+
+    }
+
+    else if (percentage >= 60) {
+
+        recommendation +=
+            " Consider improving your technical skills through projects and certifications.";
+
+    }
+
+    else {
+
+        recommendation +=
+            " Focus on strengthening your fundamentals and practical skills before choosing a specialization.";
+
+    }
+
+
+    document.getElementById(
+        "resultName"
+    ).innerHTML = name;
+
+
+    document.getElementById(
+        "resultAge"
+    ).innerHTML = age;
+
+
+    document.getElementById(
+        "resultAddress"
+    ).innerHTML = address;
+
+
+    document.getElementById(
+        "resultPhone"
+    ).innerHTML = phone;
+
+
+    document.getElementById(
+        "resultSubjects"
+    ).innerHTML = subjects;
+
+
+    document.getElementById(
+        "resultYear"
+    ).innerHTML = year;
+
+
+    document.getElementById(
+        "resultPercentage"
+    ).innerHTML = percentage;
+
+
+    document.getElementById(
+        "resultDomain"
+    ).innerHTML = domain;
+
+
+    document.getElementById(
+        "resultPreference"
+    ).innerHTML = preference;
+
+
+    document.getElementById(
+        "recommendation"
+    ).innerHTML = recommendation;
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

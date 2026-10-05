@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students Attendance System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .field {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        .good {
+            color: green;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .danger {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 Students Attendance System</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Attendance Application
+    </p>
+
+    <h3>Student Details</h3>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Name of Student</label>
+
+            <input type="text"
+                   id="studentName"
+                   placeholder="Enter student name">
+        </div>
+
+        <div class="field">
+            <label>Register Number</label>
+
+            <input type="text"
+                   id="regNo"
+                   placeholder="Enter register number">
+        </div>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Course</label>
+
+        <select id="course">
+
+            <option value="">
+                Select Course
+            </option>
+
+            <option>B.Tech Artificial Intelligence</option>
+            <option>B.Tech Computer Science</option>
+            <option>B.Tech Electronics</option>
+            <option>B.Tech Information Technology</option>
+            <option>B.Tech Mechanical Engineering</option>
+            <option>B.Tech Civil Engineering</option>
+
+        </select>
+
+    </div>
+
+
+    <h3>Attendance Details</h3>
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Total Classes</label>
+
+            <input type="number"
+                   id="totalClasses"
+                   min="1"
+                   placeholder="Enter total classes">
+
+        </div>
+
+        <div class="field">
+
+            <label>Present</label>
+
+            <input type="number"
+                   id="present"
+                   min="0"
+                   placeholder="Classes attended">
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Absent</label>
+
+            <input type="number"
+                   id="absent"
+                   min="0"
+                   placeholder="Classes absent">
+
+        </div>
+
+        <div class="field">
+
+            <label>OD Request</label>
+
+            <select id="od">
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Course Grade</label>
+
+        <select id="grade">
+
+            <option>A+</option>
+            <option>A</option>
+            <option>B+</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+
+        </select>
+
+    </div>
+
+
+    <button onclick="calculateAttendance()">
+        CALCULATE ATTENDANCE
+    </button>
+
+
+    <div id="result">
+
+        <h3>Attendance Report</h3>
+
+        <p>
+            <b>Student Name:</b>
+            <span id="resultName"></span>
+        </p>
+
+        <p>
+            <b>Register Number:</b>
+            <span id="resultReg"></span>
+        </p>
+
+        <p>
+            <b>Course:</b>
+            <span id="resultCourse"></span>
+        </p>
+
+
+        <table>
+
+            <tr>
+                <th>Attendance Details</th>
+                <th>Value</th>
+            </tr>
+
+            <tr>
+                <td>Total Classes</td>
+                <td id="resultTotal"></td>
+            </tr>
+
+            <tr>
+                <td>Present</td>
+                <td id="resultPresent"></td>
+            </tr>
+
+            <tr>
+                <td>Absent</td>
+                <td id="resultAbsent"></td>
+            </tr>
+
+            <tr>
+                <td>OD Request</td>
+                <td id="resultOD"></td>
+            </tr>
+
+            <tr>
+                <td>Course Grade</td>
+                <td id="resultGrade"></td>
+            </tr>
+
+            <tr>
+                <td><b>Attendance Percentage</b></td>
+                <td>
+                    <b>
+                        <span id="percentage"></span>%
+                    </b>
+                </td>
+            </tr>
+
+        </table>
+
+
+        <p>
+            <b>Attendance Status:</b>
+            <span id="status"></span>
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function calculateAttendance() {
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let regNo =
+        document.getElementById("regNo").value;
+
+    let course =
+        document.getElementById("course").value;
+
+    let total =
+        Number(document.getElementById(
+            "totalClasses"
+        ).value);
+
+    let present =
+        Number(document.getElementById(
+            "present"
+        ).value);
+
+    let absent =
+        Number(document.getElementById(
+            "absent"
+        ).value);
+
+    let od =
+        document.getElementById("od").value;
+
+    let grade =
+        document.getElementById("grade").value;
+
+
+    if (name == "") {
+
+        alert("Please enter student name.");
+
+        return;
+    }
+
+
+    if (regNo == "") {
+
+        alert("Please enter register number.");
+
+        return;
+    }
+
+
+    if (course == "") {
+
+        alert("Please select a course.");
+
+        return;
+    }
+
+
+    if (total <= 0) {
+
+        alert("Please enter total classes.");
+
+        return;
+    }
+
+
+    if (present < 0 || present > total) {
+
+        alert(
+            "Present classes must be between 0 and total classes."
+        );
+
+        return;
+    }
+
+
+    if (absent < 0 || absent > total) {
+
+        alert(
+            "Absent classes must be between 0 and total classes."
+        );
+
+        return;
+    }
+
+
+    if (present + absent > total) {
+
+        alert(
+            "Present + Absent cannot be greater than total classes."
+        );
+
+        return;
+    }
+
+
+    let percentage =
+        (present / total) * 100;
+
+
+    let status;
+    let statusClass;
+
+
+    if (percentage >= 90) {
+
+        status = "Excellent Attendance";
+        statusClass = "good";
+
+    }
+    else if (percentage >= 75) {
+
+        status = "Good Attendance";
+        statusClass = "good";
+
+    }
+    else if (percentage >= 65) {
+
+        status = "Attendance Shortage";
+        statusClass = "warning";
+
+    }
+    else {
+
+        status = "Low Attendance";
+        statusClass = "danger";
+
+    }
+
+
+    document.getElementById(
+        "resultName"
+    ).innerHTML = name;
+
+
+    document.getElementById(
+        "resultReg"
+    ).innerHTML = regNo;
+
+
+    document.getElementById(
+        "resultCourse"
+    ).innerHTML = course;
+
+
+    document.getElementById(
+        "resultTotal"
+    ).innerHTML = total;
+
+
+    document.getElementById(
+        "resultPresent"
+    ).innerHTML = present;
+
+
+    document.getElementById(
+        "resultAbsent"
+    ).innerHTML = absent;
+
+
+    document.getElementById(
+        "resultOD"
+    ).innerHTML = od;
+
+
+    document.getElementById(
+        "resultGrade"
+    ).innerHTML = grade;
+
+
+    document.getElementById(
+        "percentage"
+    ).innerHTML =
+        percentage.toFixed(2);
+
+
+    let statusElement =
+        document.getElementById("status");
+
+    statusElement.innerHTML = status;
+
+    statusElement.className = statusClass;
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

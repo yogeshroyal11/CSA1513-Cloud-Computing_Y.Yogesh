@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Reservation System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eaf2f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .field {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .radio {
+            margin-bottom: 15px;
+        }
+
+        .radio label {
+            display: inline;
+            margin-right: 20px;
+            font-weight: normal;
+        }
+
+        .radio input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f1f8ff;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✈ Flight Reservation System</h1>
+
+    <p class="subtitle">Cloud-Based SaaS Application</p>
+
+    <h3>Trip Details</h3>
+
+    <!-- Trip Type -->
+    <div class="radio">
+        <label>Trip Type:</label>
+
+        <label>
+            <input type="radio" name="trip" value="One Way" checked>
+            One Way
+        </label>
+
+        <label>
+            <input type="radio" name="trip" value="Round Trip">
+            Round Trip
+        </label>
+    </div>
+
+    <!-- Flight Type -->
+    <div class="radio">
+        <label>Flight Type:</label>
+
+        <label>
+            <input type="radio" name="flight" value="Domestic" checked>
+            Domestic
+        </label>
+
+        <label>
+            <input type="radio" name="flight" value="International">
+            International
+        </label>
+    </div>
+
+    <!-- From and To -->
+    <div class="row">
+
+        <div class="field">
+            <label>From</label>
+
+            <select id="from">
+                <option>Select City</option>
+                <option>Chennai</option>
+                <option>Hyderabad</option>
+                <option>Bangalore</option>
+                <option>Mumbai</option>
+                <option>Delhi</option>
+                <option>Kolkata</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>To</label>
+
+            <select id="to">
+                <option>Select City</option>
+                <option>Chennai</option>
+                <option>Hyderabad</option>
+                <option>Bangalore</option>
+                <option>Mumbai</option>
+                <option>Delhi</option>
+                <option>Kolkata</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- Dates -->
+    <div class="row">
+
+        <div class="field">
+            <label>Departure</label>
+            <input type="date" id="departure">
+        </div>
+
+        <div class="field">
+            <label>Return</label>
+            <input type="date" id="returnDate">
+        </div>
+
+    </div>
+
+    <!-- Travelers and Class -->
+    <div class="row">
+
+        <div class="field">
+            <label>Travelers</label>
+
+            <select id="travelers">
+                <option>1 Adult</option>
+                <option>2 Adults</option>
+                <option>3 Adults</option>
+                <option>4 Adults</option>
+                <option>5 Adults</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Class</label>
+
+            <select id="classType">
+                <option>Economy</option>
+                <option>Premium Economy</option>
+                <option>Business</option>
+                <option>First Class</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- Fare Type -->
+    <div class="field">
+
+        <label>Fare Type</label>
+
+        <select id="fareType">
+            <option>Regular</option>
+            <option>Student</option>
+            <option>Senior Citizen</option>
+            <option>Armed Forces</option>
+        </select>
+
+    </div>
+
+    <button onclick="searchFlight()">
+        SEARCH FLIGHTS
+    </button>
+
+    <!-- Result -->
+    <div id="result">
+
+        <h3>Available Flight</h3>
+
+        <p><b>Airline:</b> IndiGo</p>
+
+        <p>
+            <b>Route:</b>
+            <span id="route"></span>
+        </p>
+
+        <p>
+            <b>Departure:</b>
+            <span id="date"></span>
+        </p>
+
+        <p>
+            <b>Travelers:</b>
+            <span id="travelerResult"></span>
+        </p>
+
+        <p>
+            <b>Class:</b>
+            <span id="classResult"></span>
+        </p>
+
+        <p>
+            <b>Fare Type:</b>
+            <span id="fareResult"></span>
+        </p>
+
+        <p><b>Price:</b> ₹4,500</p>
+
+        <button onclick="bookFlight()">
+            BOOK FLIGHT
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function searchFlight() {
+
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+
+    let departure = document.getElementById("departure").value;
+
+    let travelers =
+        document.getElementById("travelers").value;
+
+    let classType =
+        document.getElementById("classType").value;
+
+    let fareType =
+        document.getElementById("fareType").value;
+
+    if (from == "Select City" || to == "Select City") {
+        alert("Please select From and To cities.");
+        return;
+    }
+
+    if (from == to) {
+        alert("From and To cities cannot be the same.");
+        return;
+    }
+
+    if (departure == "") {
+        alert("Please select departure date.");
+        return;
+    }
+
+    document.getElementById("route").innerHTML =
+        from + " → " + to;
+
+    document.getElementById("date").innerHTML =
+        departure;
+
+    document.getElementById("travelerResult").innerHTML =
+        travelers;
+
+    document.getElementById("classResult").innerHTML =
+        classType;
+
+    document.getElementById("fareResult").innerHTML =
+        fareType;
+
+    document.getElementById("result").style.display =
+        "block";
+}
+
+function bookFlight() {
+
+    alert(
+        "Flight booked successfully! ✈\n\n" +
+        "Thank you for using Flight Reservation System."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

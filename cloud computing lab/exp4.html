@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIMATS Library Book Reservation System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .field {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .book {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 SIMATS Library</h1>
+
+    <p class="subtitle">
+        Cloud-Based Library Book Reservation System
+    </p>
+
+    <h3>Student Details</h3>
+
+    <div class="field">
+        <label>Student Name</label>
+        <input type="text" id="studentName"
+               placeholder="Enter student name">
+    </div>
+
+    <div class="field">
+        <label>Student ID</label>
+        <input type="text" id="studentId"
+               placeholder="Enter student ID">
+    </div>
+
+
+    <h3>Book Details</h3>
+
+    <div class="field">
+        <label>Title of the Book</label>
+
+        <select id="bookTitle">
+
+            <option value="">Select Book</option>
+
+            <option>Data Structures</option>
+
+            <option>Database Management Systems</option>
+
+            <option>Computer Networks</option>
+
+            <option>Machine Learning</option>
+
+            <option>Artificial Intelligence</option>
+
+            <option>Operating Systems</option>
+
+            <option>Python Programming</option>
+
+            <option>Cloud Computing</option>
+
+        </select>
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Author</label>
+
+            <input type="text"
+                   id="author"
+                   placeholder="Enter author name">
+
+        </div>
+
+        <div class="field">
+
+            <label>Publication</label>
+
+            <input type="text"
+                   id="publication"
+                   placeholder="Enter publication">
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Year</label>
+
+            <input type="number"
+                   id="year"
+                   placeholder="Enter year">
+
+        </div>
+
+        <div class="field">
+
+            <label>Edition</label>
+
+            <select id="edition">
+
+                <option>1st Edition</option>
+                <option>2nd Edition</option>
+                <option>3rd Edition</option>
+                <option>4th Edition</option>
+                <option>5th Edition</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>No. of Copies</label>
+
+            <input type="number"
+                   id="copies"
+                   min="1"
+                   placeholder="Enter number of copies">
+
+        </div>
+
+        <div class="field">
+
+            <label>Rack No.</label>
+
+            <input type="text"
+                   id="rack"
+                   placeholder="Example: A-12">
+
+        </div>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Book Status</label>
+
+        <select id="status">
+
+            <option value="Returned">
+                Returned / Available
+            </option>
+
+            <option value="Taken">
+                Taken
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button onclick="reserveBook()">
+        RESERVE BOOK
+    </button>
+
+
+    <div id="result">
+
+        <h3>📖 Reservation Details</h3>
+
+        <div class="book">
+
+            <p>
+                <b>Student Name:</b>
+                <span id="resultStudent"></span>
+            </p>
+
+            <p>
+                <b>Student ID:</b>
+                <span id="resultId"></span>
+            </p>
+
+            <p>
+                <b>Book Title:</b>
+                <span id="resultTitle"></span>
+            </p>
+
+            <p>
+                <b>Author:</b>
+                <span id="resultAuthor"></span>
+            </p>
+
+            <p>
+                <b>Publication:</b>
+                <span id="resultPublication"></span>
+            </p>
+
+            <p>
+                <b>Year:</b>
+                <span id="resultYear"></span>
+            </p>
+
+            <p>
+                <b>Edition:</b>
+                <span id="resultEdition"></span>
+            </p>
+
+            <p>
+                <b>No. of Copies:</b>
+                <span id="resultCopies"></span>
+            </p>
+
+            <p>
+                <b>Rack No:</b>
+                <span id="resultRack"></span>
+            </p>
+
+            <p>
+                <b>Status:</b>
+                <span id="resultStatus"></span>
+            </p>
+
+            <p class="success">
+                ✓ Book reservation request submitted successfully!
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function reserveBook() {
+
+    let studentName =
+        document.getElementById("studentName").value;
+
+    let studentId =
+        document.getElementById("studentId").value;
+
+    let bookTitle =
+        document.getElementById("bookTitle").value;
+
+    let author =
+        document.getElementById("author").value;
+
+    let publication =
+        document.getElementById("publication").value;
+
+    let year =
+        document.getElementById("year").value;
+
+    let edition =
+        document.getElementById("edition").value;
+
+    let copies =
+        document.getElementById("copies").value;
+
+    let rack =
+        document.getElementById("rack").value;
+
+    let status =
+        document.getElementById("status").value;
+
+
+    if (studentName == "") {
+
+        alert("Please enter student name.");
+
+        return;
+    }
+
+
+    if (studentId == "") {
+
+        alert("Please enter student ID.");
+
+        return;
+    }
+
+
+    if (bookTitle == "") {
+
+        alert("Please select a book.");
+
+        return;
+    }
+
+
+    if (author == "") {
+
+        alert("Please enter author name.");
+
+        return;
+    }
+
+
+    if (publication == "") {
+
+        alert("Please enter publication.");
+
+        return;
+    }
+
+
+    if (year == "") {
+
+        alert("Please enter publication year.");
+
+        return;
+    }
+
+
+    if (copies == "") {
+
+        alert("Please enter number of copies.");
+
+        return;
+    }
+
+
+    if (rack == "") {
+
+        alert("Please enter rack number.");
+
+        return;
+    }
+
+
+    document.getElementById(
+        "resultStudent"
+    ).innerHTML = studentName;
+
+
+    document.getElementById(
+        "resultId"
+    ).innerHTML = studentId;
+
+
+    document.getElementById(
+        "resultTitle"
+    ).innerHTML = bookTitle;
+
+
+    document.getElementById(
+        "resultAuthor"
+    ).innerHTML = author;
+
+
+    document.getElementById(
+        "resultPublication"
+    ).innerHTML = publication;
+
+
+    document.getElementById(
+        "resultYear"
+    ).innerHTML = year;
+
+
+    document.getElementById(
+        "resultEdition"
+    ).innerHTML = edition;
+
+
+    document.getElementById(
+        "resultCopies"
+    ).innerHTML = copies;
+
+
+    document.getElementById(
+        "resultRack"
+    ).innerHTML = rack;
+
+
+    document.getElementById(
+        "resultStatus"
+    ).innerHTML = status;
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

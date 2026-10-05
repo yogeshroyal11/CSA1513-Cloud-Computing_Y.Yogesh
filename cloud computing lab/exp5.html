@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark Sheet Processing System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .marks {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .marks div {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        .performance {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Mark Sheet Processing System</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Application
+    </p>
+
+    <h3>Student Details</h3>
+
+    <div class="field">
+        <label>Name of the Student</label>
+
+        <input type="text"
+               id="studentName"
+               placeholder="Enter student name">
+    </div>
+
+    <div class="field">
+        <label>Register Number</label>
+
+        <input type="text"
+               id="regNo"
+               placeholder="Enter register number">
+    </div>
+
+
+    <h3>Subject Marks</h3>
+
+    <div class="marks">
+
+        <div>
+            <label>Mathematics</label>
+
+            <input type="number"
+                   id="maths"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+        <div>
+            <label>Physics</label>
+
+            <input type="number"
+                   id="physics"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+    </div>
+
+
+    <div class="marks">
+
+        <div>
+            <label>C Programming</label>
+
+            <input type="number"
+                   id="cprogram"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+        <div>
+            <label>Data Structures</label>
+
+            <input type="number"
+                   id="ds"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+    </div>
+
+
+    <div class="marks">
+
+        <div>
+            <label>Computer Networks</label>
+
+            <input type="number"
+                   id="cn"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+        <div>
+            <label>Cloud Computing</label>
+
+            <input type="number"
+                   id="cloud"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+        </div>
+
+    </div>
+
+
+    <button onclick="processMarks()">
+        PROCESS MARKS
+    </button>
+
+
+    <div id="result">
+
+        <h3>Mark Sheet Result</h3>
+
+        <p>
+            <b>Student Name:</b>
+            <span id="resultName"></span>
+        </p>
+
+        <p>
+            <b>Register Number:</b>
+            <span id="resultReg"></span>
+        </p>
+
+
+        <table>
+
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+
+            <tr>
+                <td>Mathematics</td>
+                <td id="resultMaths"></td>
+            </tr>
+
+            <tr>
+                <td>Physics</td>
+                <td id="resultPhysics"></td>
+            </tr>
+
+            <tr>
+                <td>C Programming</td>
+                <td id="resultC"></td>
+            </tr>
+
+            <tr>
+                <td>Data Structures</td>
+                <td id="resultDS"></td>
+            </tr>
+
+            <tr>
+                <td>Computer Networks</td>
+                <td id="resultCN"></td>
+            </tr>
+
+            <tr>
+                <td>Cloud Computing</td>
+                <td id="resultCloud"></td>
+            </tr>
+
+        </table>
+
+
+        <p>
+            <b>Total Marks:</b>
+            <span id="total"></span> / 600
+        </p>
+
+        <p>
+            <b>Average:</b>
+            <span id="average"></span>
+        </p>
+
+        <p>
+            <b>Percentage:</b>
+            <span id="percentage"></span>%
+        </p>
+
+        <p>
+            <b>Grade:</b>
+            <span id="grade"></span>
+        </p>
+
+        <p>
+            <b>Rank:</b>
+            <span id="rank"></span>
+        </p>
+
+        <p class="performance">
+            Overall Performance:
+            <span id="performance"></span>
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function processMarks() {
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let regNo =
+        document.getElementById("regNo").value;
+
+    let maths =
+        Number(document.getElementById("maths").value);
+
+    let physics =
+        Number(document.getElementById("physics").value);
+
+    let cprogram =
+        Number(document.getElementById("cprogram").value);
+
+    let ds =
+        Number(document.getElementById("ds").value);
+
+    let cn =
+        Number(document.getElementById("cn").value);
+
+    let cloud =
+        Number(document.getElementById("cloud").value);
+
+
+    if (name == "" || regNo == "") {
+
+        alert("Please enter student name and register number.");
+
+        return;
+    }
+
+
+    if (
+        maths < 0 || maths > 100 ||
+        physics < 0 || physics > 100 ||
+        cprogram < 0 || cprogram > 100 ||
+        ds < 0 || ds > 100 ||
+        cn < 0 || cn > 100 ||
+        cloud < 0 || cloud > 100
+    ) {
+
+        alert("Marks must be between 0 and 100.");
+
+        return;
+    }
+
+
+    let total =
+        maths +
+        physics +
+        cprogram +
+        ds +
+        cn +
+        cloud;
+
+
+    let average = total / 6;
+
+    let percentage = (total / 600) * 100;
+
+
+    let grade;
+
+    if (percentage >= 90) {
+        grade = "A+";
+    }
+    else if (percentage >= 80) {
+        grade = "A";
+    }
+    else if (percentage >= 70) {
+        grade = "B";
+    }
+    else if (percentage >= 60) {
+        grade = "C";
+    }
+    else if (percentage >= 50) {
+        grade = "D";
+    }
+    else {
+        grade = "F";
+    }
+
+
+    let rank;
+
+    if (percentage >= 90) {
+        rank = "1";
+    }
+    else if (percentage >= 80) {
+        rank = "2";
+    }
+    else if (percentage >= 70) {
+        rank = "3";
+    }
+    else if (percentage >= 60) {
+        rank = "4";
+    }
+    else {
+        rank = "5+";
+    }
+
+
+    let performance;
+
+    if (percentage >= 90) {
+        performance = "Excellent";
+    }
+    else if (percentage >= 80) {
+        performance = "Very Good";
+    }
+    else if (percentage >= 70) {
+        performance = "Good";
+    }
+    else if (percentage >= 50) {
+        performance = "Average";
+    }
+    else {
+        performance = "Needs Improvement";
+    }
+
+
+    document.getElementById("resultName").innerHTML = name;
+
+    document.getElementById("resultReg").innerHTML = regNo;
+
+    document.getElementById("resultMaths").innerHTML = maths;
+
+    document.getElementById("resultPhysics").innerHTML = physics;
+
+    document.getElementById("resultC").innerHTML = cprogram;
+
+    document.getElementById("resultDS").innerHTML = ds;
+
+    document.getElementById("resultCN").innerHTML = cn;
+
+    document.getElementById("resultCloud").innerHTML = cloud;
+
+    document.getElementById("total").innerHTML = total;
+
+    document.getElementById("average").innerHTML =
+        average.toFixed(2);
+
+    document.getElementById("percentage").innerHTML =
+        percentage.toFixed(2);
+
+    document.getElementById("grade").innerHTML = grade;
+
+    document.getElementById("rank").innerHTML = rank;
+
+    document.getElementById("performance").innerHTML =
+        performance;
+
+
+    document.getElementById("result").style.display =
+        "block";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chennai Property Buying & Rental System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 700px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: inline-block;
+            margin: 8px 5px 8px 0;
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .radio label {
+            font-weight: normal;
+            margin-right: 20px;
+        }
+
+        .radio input {
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .property {
+            padding: 15px;
+            margin-top: 15px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .property button {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🏠 Chennai Property Portal</h1>
+
+    <p class="subtitle">
+        Cloud-Based Property Buying & Rental SaaS Application
+    </p>
+
+    <h3>Property Requirement</h3>
+
+    <!-- Buy / Rent -->
+    <div class="section">
+
+        <label>Requirement:</label>
+
+        <div class="radio">
+
+            <label>
+                <input type="radio"
+                       name="requirement"
+                       value="Buy"
+                       checked>
+                Buy
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="requirement"
+                       value="Rent">
+                Rent
+            </label>
+
+        </div>
+
+    </div>
+
+    <!-- Property Type -->
+    <div class="section">
+
+        <label>Property Type:</label>
+
+        <select id="propertyType">
+
+            <option value="Residential">
+                Residential
+            </option>
+
+            <option value="Commercial">
+                Commercial
+            </option>
+
+            <option value="Apartment">
+                Apartment
+            </option>
+
+            <option value="Villa">
+                Villa
+            </option>
+
+            <option value="Plot">
+                Plot
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- Place -->
+    <div class="section">
+
+        <label>Place in Chennai:</label>
+
+        <select id="place">
+
+            <option value="Adyar">Adyar</option>
+
+            <option value="Anna Nagar">
+                Anna Nagar
+            </option>
+
+            <option value="T Nagar">
+                T Nagar
+            </option>
+
+            <option value="Velachery">
+                Velachery
+            </option>
+
+            <option value="Tambaram">
+                Tambaram
+            </option>
+
+            <option value="OMR">
+                OMR
+            </option>
+
+            <option value="Porur">
+                Porur
+            </option>
+
+            <option value="Sholinganallur">
+                Sholinganallur
+            </option>
+
+            <option value="Guindy">
+                Guindy
+            </option>
+
+            <option value="Chromepet">
+                Chromepet
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- Area -->
+    <div class="section">
+
+        <label>Area:</label>
+
+        <input type="number"
+               id="area"
+               placeholder="Enter area">
+
+        <select id="areaUnit">
+
+            <option>Sq.ft</option>
+            <option>Sq.yards</option>
+            <option>Grounds</option>
+
+        </select>
+
+    </div>
+
+    <!-- Price Range -->
+    <div class="section">
+
+        <label>Price Range:</label>
+
+        <select id="priceRange">
+
+            <option>₹10 Lakhs - ₹25 Lakhs</option>
+
+            <option>₹25 Lakhs - ₹50 Lakhs</option>
+
+            <option>₹50 Lakhs - ₹1 Crore</option>
+
+            <option>₹1 Crore - ₹2 Crores</option>
+
+            <option>Above ₹2 Crores</option>
+
+        </select>
+
+    </div>
+
+    <!-- Property Value -->
+    <div class="section">
+
+        <label>Property Value:</label>
+
+        <input type="number"
+               id="propertyValue"
+               placeholder="Enter value in ₹">
+
+    </div>
+
+    <!-- Rental Agreement -->
+    <div class="section">
+
+        <label>Rental Agreement:</label>
+
+        <select id="agreement">
+
+            <option>Not Required</option>
+
+            <option>11 Months</option>
+
+            <option>1 Year</option>
+
+            <option>2 Years</option>
+
+        </select>
+
+    </div>
+
+    <!-- Search -->
+    <button onclick="searchProperty()">
+        SEARCH PROPERTY
+    </button>
+
+    <!-- Results -->
+    <div id="result">
+
+        <h3>Available Property</h3>
+
+        <div class="property">
+
+            <h3 id="propertyName">
+                Chennai Property
+            </h3>
+
+            <p>
+                <b>Requirement:</b>
+                <span id="resultRequirement"></span>
+            </p>
+
+            <p>
+                <b>Property Type:</b>
+                <span id="resultType"></span>
+            </p>
+
+            <p>
+                <b>Location:</b>
+                <span id="resultPlace"></span>
+            </p>
+
+            <p>
+                <b>Area:</b>
+                <span id="resultArea"></span>
+            </p>
+
+            <p>
+                <b>Price Range:</b>
+                <span id="resultRange"></span>
+            </p>
+
+            <p>
+                <b>Property Value:</b>
+                ₹<span id="resultValue"></span>
+            </p>
+
+            <p>
+                <b>Rental Agreement:</b>
+                <span id="resultAgreement"></span>
+            </p>
+
+            <button onclick="contactOwner()">
+                CONTACT OWNER
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function searchProperty() {
+
+    let requirement =
+        document.querySelector(
+            'input[name="requirement"]:checked'
+        ).value;
+
+    let propertyType =
+        document.getElementById("propertyType").value;
+
+    let place =
+        document.getElementById("place").value;
+
+    let area =
+        document.getElementById("area").value;
+
+    let areaUnit =
+        document.getElementById("areaUnit").value;
+
+    let priceRange =
+        document.getElementById("priceRange").value;
+
+    let propertyValue =
+        document.getElementById("propertyValue").value;
+
+    let agreement =
+        document.getElementById("agreement").value;
+
+
+    if (area == "") {
+
+        alert("Please enter the property area.");
+
+        return;
+    }
+
+
+    if (propertyValue == "") {
+
+        alert("Please enter the property value.");
+
+        return;
+    }
+
+
+    document.getElementById(
+        "resultRequirement"
+    ).innerHTML = requirement;
+
+
+    document.getElementById(
+        "resultType"
+    ).innerHTML = propertyType;
+
+
+    document.getElementById(
+        "resultPlace"
+    ).innerHTML = place;
+
+
+    document.getElementById(
+        "resultArea"
+    ).innerHTML =
+        area + " " + areaUnit;
+
+
+    document.getElementById(
+        "resultRange"
+    ).innerHTML = priceRange;
+
+
+    document.getElementById(
+        "resultValue"
+    ).innerHTML =
+        Number(propertyValue).toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "resultAgreement"
+    ).innerHTML = agreement;
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+}
+
+
+function contactOwner() {
+
+    alert(
+        "Owner contacted successfully!\n\n" +
+        "Thank you for using Chennai Property Portal."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

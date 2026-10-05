@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Booking Reservation System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 700px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .radio {
+            margin-top: 10px;
+        }
+
+        .radio label {
+            font-weight: normal;
+            margin-right: 20px;
+        }
+
+        .radio input {
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .cab {
+            padding: 15px;
+            margin-top: 15px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .cab button {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🚕 Car Booking Reservation</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Cab Booking Application
+    </p>
+
+    <h3>Search for Cabs</h3>
+
+    <!-- Booking Type -->
+    <div class="section">
+
+        <label>Booking Type:</label>
+
+        <div class="radio">
+
+            <label>
+                <input type="radio"
+                       name="booking"
+                       value="Rental"
+                       checked>
+                Rental
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="booking"
+                       value="Outstation">
+                Outstation
+            </label>
+
+        </div>
+
+    </div>
+
+    <!-- From -->
+    <div class="section">
+
+        <label>From:</label>
+
+        <select id="from">
+
+            <option>Select Location</option>
+
+            <option>Chennai</option>
+            <option>Tambaram</option>
+            <option>Velachery</option>
+            <option>Guindy</option>
+            <option>Anna Nagar</option>
+            <option>Adyar</option>
+            <option>Airport</option>
+
+        </select>
+
+    </div>
+
+    <!-- To -->
+    <div class="section">
+
+        <label>To:</label>
+
+        <select id="to">
+
+            <option>Select Location</option>
+
+            <option>Chennai</option>
+            <option>Bangalore</option>
+            <option>Pondicherry</option>
+            <option>Vellore</option>
+            <option>Mahabalipuram</option>
+            <option>Tirupati</option>
+            <option>Coimbatore</option>
+
+        </select>
+
+    </div>
+
+    <!-- Package Type -->
+    <div class="section">
+
+        <label>Package Type:</label>
+
+        <select id="packageType">
+
+            <option>Local Package</option>
+            <option>Outstation Package</option>
+            <option>Airport Transfer</option>
+            <option>Round Trip</option>
+            <option>One Way</option>
+
+        </select>
+
+    </div>
+
+    <!-- Hours / Days -->
+    <div class="section">
+
+        <label>Duration:</label>
+
+        <input type="number"
+               id="duration"
+               min="1"
+               placeholder="Enter duration">
+
+        <select id="durationType">
+
+            <option>Hours</option>
+            <option>Days</option>
+
+        </select>
+
+    </div>
+
+    <!-- Date -->
+    <div class="section">
+
+        <label>Booking Date:</label>
+
+        <input type="date" id="bookingDate">
+
+    </div>
+
+    <!-- Car Type -->
+    <div class="section">
+
+        <label>Car Type:</label>
+
+        <select id="carType">
+
+            <option>Sedan</option>
+            <option>SUV</option>
+            <option>Hatchback</option>
+            <option>Luxury</option>
+            <option>Tempo Traveller</option>
+
+        </select>
+
+    </div>
+
+    <!-- Travelers -->
+    <div class="section">
+
+        <label>Passengers:</label>
+
+        <select id="passengers">
+
+            <option>1 Passenger</option>
+            <option>2 Passengers</option>
+            <option>3 Passengers</option>
+            <option>4 Passengers</option>
+            <option>5 Passengers</option>
+            <option>6 Passengers</option>
+            <option>7+ Passengers</option>
+
+        </select>
+
+    </div>
+
+    <!-- Search Button -->
+
+    <button onclick="searchCab()">
+        SEARCH CABS
+    </button>
+
+
+    <!-- Result -->
+
+    <div id="result">
+
+        <h3>Available Cab</h3>
+
+        <div class="cab">
+
+            <h3>🚗 Prime Sedan</h3>
+
+            <p>
+                <b>Booking Type:</b>
+                <span id="resultBooking"></span>
+            </p>
+
+            <p>
+                <b>From:</b>
+                <span id="resultFrom"></span>
+            </p>
+
+            <p>
+                <b>To:</b>
+                <span id="resultTo"></span>
+            </p>
+
+            <p>
+                <b>Package:</b>
+                <span id="resultPackage"></span>
+            </p>
+
+            <p>
+                <b>Duration:</b>
+                <span id="resultDuration"></span>
+            </p>
+
+            <p>
+                <b>Car Type:</b>
+                <span id="resultCar"></span>
+            </p>
+
+            <p>
+                <b>Passengers:</b>
+                <span id="resultPassengers"></span>
+            </p>
+
+            <p>
+                <b>Estimated Fare:</b> ₹1,499
+            </p>
+
+            <button onclick="bookCab()">
+                BOOK CAB
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function searchCab() {
+
+    let bookingType =
+        document.querySelector(
+            'input[name="booking"]:checked'
+        ).value;
+
+    let from =
+        document.getElementById("from").value;
+
+    let to =
+        document.getElementById("to").value;
+
+    let packageType =
+        document.getElementById("packageType").value;
+
+    let duration =
+        document.getElementById("duration").value;
+
+    let durationType =
+        document.getElementById("durationType").value;
+
+    let bookingDate =
+        document.getElementById("bookingDate").value;
+
+    let carType =
+        document.getElementById("carType").value;
+
+    let passengers =
+        document.getElementById("passengers").value;
+
+
+    if (from == "Select Location") {
+
+        alert("Please select the From location.");
+
+        return;
+    }
+
+
+    if (to == "Select Location") {
+
+        alert("Please select the To location.");
+
+        return;
+    }
+
+
+    if (from == to) {
+
+        alert("From and To locations cannot be the same.");
+
+        return;
+    }
+
+
+    if (duration == "") {
+
+        alert("Please enter the duration.");
+
+        return;
+    }
+
+
+    if (bookingDate == "") {
+
+        alert("Please select booking date.");
+
+        return;
+    }
+
+
+    document.getElementById(
+        "resultBooking"
+    ).innerHTML = bookingType;
+
+
+    document.getElementById(
+        "resultFrom"
+    ).innerHTML = from;
+
+
+    document.getElementById(
+        "resultTo"
+    ).innerHTML = to;
+
+
+    document.getElementById(
+        "resultPackage"
+    ).innerHTML = packageType;
+
+
+    document.getElementById(
+        "resultDuration"
+    ).innerHTML =
+        duration + " " + durationType;
+
+
+    document.getElementById(
+        "resultCar"
+    ).innerHTML = carType;
+
+
+    document.getElementById(
+        "resultPassengers"
+    ).innerHTML = passengers;
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+
+}
+
+
+function bookCab() {
+
+    alert(
+        "Cab booked successfully! 🚕\n\n" +
+        "Thank you for using our Car Booking System."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
