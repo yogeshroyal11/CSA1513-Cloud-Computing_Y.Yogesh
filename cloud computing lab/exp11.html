@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Super Market</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h3 {
+            color: #1565c0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 70px;
+            resize: vertical;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .field {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛒 Online Super Market</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Super Market Application
+    </p>
+
+
+    <!-- Customer Details -->
+
+    <h3>Customer Details</h3>
+
+    <div class="field">
+
+        <label>Customer Name</label>
+
+        <input type="text"
+               id="customerName"
+               placeholder="Enter customer name">
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Address</label>
+
+        <textarea id="address"
+                  placeholder="Enter delivery address"></textarea>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Phone</label>
+
+            <input type="tel"
+                   id="phone"
+                   placeholder="Enter phone number">
+
+        </div>
+
+        <div class="field">
+
+            <label>Email</label>
+
+            <input type="email"
+                   id="email"
+                   placeholder="Enter email address">
+
+        </div>
+
+    </div>
+
+
+    <!-- Item Classification -->
+
+    <h3>Item Classification</h3>
+
+    <div class="field">
+
+        <label>Item Category</label>
+
+        <select id="category">
+
+            <option value="">
+                Select Category
+            </option>
+
+            <option>Groceries</option>
+            <option>Fruits & Vegetables</option>
+            <option>Dairy Products</option>
+            <option>Beverages</option>
+            <option>Snacks</option>
+            <option>Personal Care</option>
+            <option>Household Items</option>
+
+        </select>
+
+    </div>
+
+
+    <!-- Item Details -->
+
+    <h3>Item Details</h3>
+
+    <div class="field">
+
+        <label>Item</label>
+
+        <select id="item">
+
+            <option value="">
+                Select Item
+            </option>
+
+            <option>Rice</option>
+            <option>Wheat</option>
+            <option>Sugar</option>
+            <option>Milk</option>
+            <option>Apples</option>
+            <option>Bananas</option>
+            <option>Bread</option>
+            <option>Biscuits</option>
+            <option>Soap</option>
+            <option>Shampoo</option>
+            <option>Cooking Oil</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="field">
+
+            <label>Quantity</label>
+
+            <input type="number"
+                   id="quantity"
+                   min="1"
+                   placeholder="Enter quantity">
+
+        </div>
+
+        <div class="field">
+
+            <label>Price per Item (₹)</label>
+
+            <input type="number"
+                   id="price"
+                   min="1"
+                   placeholder="Enter price">
+
+        </div>
+
+    </div>
+
+
+    <button onclick="placeOrder()">
+        PLACE ORDER
+    </button>
+
+
+    <!-- Order Result -->
+
+    <div id="result">
+
+        <h3>🛍 Order Summary</h3>
+
+        <p>
+            <b>Customer Name:</b>
+            <span id="resultName"></span>
+        </p>
+
+        <p>
+            <b>Address:</b>
+            <span id="resultAddress"></span>
+        </p>
+
+        <p>
+            <b>Phone:</b>
+            <span id="resultPhone"></span>
+        </p>
+
+        <p>
+            <b>Email:</b>
+            <span id="resultEmail"></span>
+        </p>
+
+
+        <table>
+
+            <tr>
+                <th>Category</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+
+            <tr>
+
+                <td id="resultCategory"></td>
+
+                <td id="resultItem"></td>
+
+                <td id="resultQuantity"></td>
+
+                <td>
+                    ₹<span id="resultPrice"></span>
+                </td>
+
+                <td>
+                    ₹<span id="resultTotal"></span>
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <p class="total">
+            Total Order Amount:
+            ₹<span id="finalTotal"></span>
+        </p>
+
+
+        <button onclick="confirmOrder()">
+            CONFIRM ORDER
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function placeOrder() {
+
+    let name =
+        document.getElementById("customerName").value;
+
+    let address =
+        document.getElementById("address").value;
+
+    let phone =
+        document.getElementById("phone").value;
+
+    let email =
+        document.getElementById("email").value;
+
+    let category =
+        document.getElementById("category").value;
+
+    let item =
+        document.getElementById("item").value;
+
+    let quantity =
+        Number(document.getElementById("quantity").value);
+
+    let price =
+        Number(document.getElementById("price").value);
+
+
+    if (name == "") {
+
+        alert("Please enter customer name.");
+
+        return;
+    }
+
+
+    if (address == "") {
+
+        alert("Please enter delivery address.");
+
+        return;
+    }
+
+
+    if (phone == "") {
+
+        alert("Please enter phone number.");
+
+        return;
+    }
+
+
+    if (email == "") {
+
+        alert("Please enter email address.");
+
+        return;
+    }
+
+
+    if (category == "") {
+
+        alert("Please select item category.");
+
+        return;
+    }
+
+
+    if (item == "") {
+
+        alert("Please select an item.");
+
+        return;
+    }
+
+
+    if (quantity <= 0) {
+
+        alert("Please enter valid quantity.");
+
+        return;
+    }
+
+
+    if (price <= 0) {
+
+        alert("Please enter valid price.");
+
+        return;
+    }
+
+
+    let total = quantity * price;
+
+
+    document.getElementById(
+        "resultName"
+    ).innerHTML = name;
+
+
+    document.getElementById(
+        "resultAddress"
+    ).innerHTML = address;
+
+
+    document.getElementById(
+        "resultPhone"
+    ).innerHTML = phone;
+
+
+    document.getElementById(
+        "resultEmail"
+    ).innerHTML = email;
+
+
+    document.getElementById(
+        "resultCategory"
+    ).innerHTML = category;
+
+
+    document.getElementById(
+        "resultItem"
+    ).innerHTML = item;
+
+
+    document.getElementById(
+        "resultQuantity"
+    ).innerHTML = quantity;
+
+
+    document.getElementById(
+        "resultPrice"
+    ).innerHTML =
+        price.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "resultTotal"
+    ).innerHTML =
+        total.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "finalTotal"
+    ).innerHTML =
+        total.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "result"
+    ).style.display = "block";
+
+}
+
+
+function confirmOrder() {
+
+    alert(
+        "Order placed successfully! 🛒\n\n" +
+        "Thank you for shopping with us."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

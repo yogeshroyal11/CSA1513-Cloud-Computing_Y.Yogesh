@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+        }
+
+        h2 {
+            color: #1565c0;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .field {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        #studentInfo {
+            display: none;
+            margin-top: 25px;
+        }
+
+        .card {
+            background-color: #f1f8ff;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        .good {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 Student Information System</h1>
+
+    <p class="subtitle">
+        Cloud-Based SaaS Student Management Application
+    </p>
+
+
+    <!-- Student Information -->
+
+    <div class="section">
+
+        <h2>Student Information</h2>
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Student Name</label>
+
+                <input type="text"
+                       id="name"
+                       placeholder="Enter student name">
+
+            </div>
+
+            <div class="field">
+
+                <label>Register Number</label>
+
+                <input type="text"
+                       id="regno"
+                       placeholder="Enter register number">
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Address</label>
+
+                <input type="text"
+                       id="address"
+                       placeholder="Enter address">
+
+            </div>
+
+            <div class="field">
+
+                <label>Phone</label>
+
+                <input type="tel"
+                       id="phone"
+                       placeholder="Enter phone number">
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Age</label>
+
+                <input type="number"
+                       id="age"
+                       placeholder="Enter age">
+
+            </div>
+
+            <div class="field">
+
+                <label>Course</label>
+
+                <select id="course">
+
+                    <option value="">Select Course</option>
+
+                    <option>B.Tech AI & ML</option>
+                    <option>B.Tech CSE</option>
+                    <option>B.Tech ECE</option>
+                    <option>B.Tech IT</option>
+                    <option>B.Tech Mechanical</option>
+                    <option>B.Tech Civil</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Academic Details -->
+
+    <div class="section">
+
+        <h2>Academic Details</h2>
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Overall Grade</label>
+
+                <select id="grade">
+
+                    <option>A+</option>
+                    <option>A</option>
+                    <option>B+</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label>Attendance Percentage</label>
+
+                <input type="number"
+                       id="attendance"
+                       min="0"
+                       max="100"
+                       placeholder="Enter percentage">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Semester Marks -->
+
+    <div class="section">
+
+        <h2>Semester Mark Sheet</h2>
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Mathematics</label>
+
+                <input type="number"
+                       id="maths"
+                       min="0"
+                       max="100"
+                       placeholder="Marks">
+
+            </div>
+
+            <div class="field">
+
+                <label>Programming</label>
+
+                <input type="number"
+                       id="programming"
+                       min="0"
+                       max="100"
+                       placeholder="Marks">
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Data Structures</label>
+
+                <input type="number"
+                       id="ds"
+                       min="0"
+                       max="100"
+                       placeholder="Marks">
+
+            </div>
+
+            <div class="field">
+
+                <label>Computer Networks</label>
+
+                <input type="number"
+                       id="cn"
+                       min="0"
+                       max="100"
+                       placeholder="Marks">
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Cloud Computing</label>
+
+            <input type="number"
+                   id="cloud"
+                   min="0"
+                   max="100"
+                   placeholder="Marks">
+
+        </div>
+
+    </div>
+
+
+    <button onclick="displayStudent()">
+        DISPLAY STUDENT INFORMATION
+    </button>
+
+
+    <!-- Output -->
+
+    <div id="studentInfo">
+
+        <div class="card">
+
+            <h2>Student Information</h2>
+
+            <p>
+                <b>Name:</b>
+                <span id="outName"></span>
+            </p>
+
+            <p>
+                <b>Register No:</b>
+                <span id="outReg"></span>
+            </p>
+
+            <p>
+                <b>Address:</b>
+                <span id="outAddress"></span>
+            </p>
+
+            <p>
+                <b>Phone:</b>
+                <span id="outPhone"></span>
+            </p>
+
+            <p>
+                <b>Age:</b>
+                <span id="outAge"></span>
+            </p>
+
+            <p>
+                <b>Course:</b>
+                <span id="outCourse"></span>
+            </p>
+
+            <p>
+                <b>Grade:</b>
+                <span id="outGrade"></span>
+            </p>
+
+        </div>
+
+
+        <!-- Attendance Report -->
+
+        <div class="card">
+
+            <h2>📅 Attendance Report</h2>
+
+            <p>
+                <b>Attendance Percentage:</b>
+                <span id="outAttendance"></span>%
+            </p>
+
+            <p>
+                <b>Status:</b>
+                <span id="attendanceStatus"></span>
+            </p>
+
+        </div>
+
+
+        <!-- Progress Report -->
+
+        <div class="card">
+
+            <h2>📈 Progress Report</h2>
+
+            <p>
+                <b>Total Marks:</b>
+                <span id="totalMarks"></span> / 500
+            </p>
+
+            <p>
+                <b>Average:</b>
+                <span id="average"></span>
+            </p>
+
+            <p>
+                <b>Percentage:</b>
+                <span id="percentage"></span>%
+            </p>
+
+            <p>
+                <b>Performance:</b>
+                <span id="performance"></span>
+            </p>
+
+        </div>
+
+
+        <!-- Semester Mark Sheet -->
+
+        <div class="card">
+
+            <h2>📋 Semester Mark Sheet</h2>
+
+            <table>
+
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+
+                <tr>
+                    <td>Mathematics</td>
+                    <td id="outMaths"></td>
+                </tr>
+
+                <tr>
+                    <td>Programming</td>
+                    <td id="outProgramming"></td>
+                </tr>
+
+                <tr>
+                    <td>Data Structures</td>
+                    <td id="outDS"></td>
+                </tr>
+
+                <tr>
+                    <td>Computer Networks</td>
+                    <td id="outCN"></td>
+                </tr>
+
+                <tr>
+                    <td>Cloud Computing</td>
+                    <td id="outCloud"></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function displayStudent() {
+
+    let name =
+        document.getElementById("name").value;
+
+    let regno =
+        document.getElementById("regno").value;
+
+    let address =
+        document.getElementById("address").value;
+
+    let phone =
+        document.getElementById("phone").value;
+
+    let age =
+        document.getElementById("age").value;
+
+    let course =
+        document.getElementById("course").value;
+
+    let grade =
+        document.getElementById("grade").value;
+
+    let attendance =
+        Number(document.getElementById(
+            "attendance"
+        ).value);
+
+    let maths =
+        Number(document.getElementById("maths").value);
+
+    let programming =
+        Number(document.getElementById(
+            "programming"
+        ).value);
+
+    let ds =
+        Number(document.getElementById("ds").value);
+
+    let cn =
+        Number(document.getElementById("cn").value);
+
+    let cloud =
+        Number(document.getElementById("cloud").value);
+
+
+    if (name == "" ||
+        regno == "" ||
+        address == "" ||
+        phone == "" ||
+        age == "" ||
+        course == "") {
+
+        alert("Please fill all student details.");
+
+        return;
+    }
+
+
+    if (attendance < 0 ||
+        attendance > 100) {
+
+        alert(
+            "Attendance must be between 0 and 100."
+        );
+
+        return;
+    }
+
+
+    if (
+        maths < 0 || maths > 100 ||
+        programming < 0 || programming > 100 ||
+        ds < 0 || ds > 100 ||
+        cn < 0 || cn > 100 ||
+        cloud < 0 || cloud > 100
+    ) {
+
+        alert(
+            "Marks must be between 0 and 100."
+        );
+
+        return;
+    }
+
+
+    /* Total and Average */
+
+    let total =
+        maths +
+        programming +
+        ds +
+        cn +
+        cloud;
+
+    let average =
+        total / 5;
+
+    let percentage =
+        (total / 500) * 100;
+
+
+    /* Performance */
+
+    let performance;
+
+    if (percentage >= 90) {
+
+        performance = "Excellent";
+
+    }
+    else if (percentage >= 80) {
+
+        performance = "Very Good";
+
+    }
+    else if (percentage >= 70) {
+
+        performance = "Good";
+
+    }
+    else if (percentage >= 50) {
+
+        performance = "Average";
+
+    }
+    else {
+
+        performance = "Needs Improvement";
+
+    }
+
+
+    /* Attendance Status */
+
+    let attendanceStatus;
+
+    if (attendance >= 75) {
+
+        attendanceStatus =
+            "Eligible / Good Attendance";
+
+    }
+    else {
+
+        attendanceStatus =
+            "Attendance Shortage";
+
+    }
+
+
+    /* Student Information */
+
+    document.getElementById(
+        "outName"
+    ).innerHTML = name;
+
+    document.getElementById(
+        "outReg"
+    ).innerHTML = regno;
+
+    document.getElementById(
+        "outAddress"
+    ).innerHTML = address;
+
+    document.getElementById(
+        "outPhone"
+    ).innerHTML = phone;
+
+    document.getElementById(
+        "outAge"
+    ).innerHTML = age;
+
+    document.getElementById(
+        "outCourse"
+    ).innerHTML = course;
+
+    document.getElementById(
+        "outGrade"
+    ).innerHTML = grade;
+
+
+    /* Attendance */
+
+    document.getElementById(
+        "outAttendance"
+    ).innerHTML =
+        attendance.toFixed(2);
+
+    document.getElementById(
+        "attendanceStatus"
+    ).innerHTML =
+        attendanceStatus;
+
+
+    /* Progress */
+
+    document.getElementById(
+        "totalMarks"
+    ).innerHTML = total;
+
+    document.getElementById(
+        "average"
+    ).innerHTML =
+        average.toFixed(2);
+
+    document.getElementById(
+        "percentage"
+    ).innerHTML =
+        percentage.toFixed(2);
+
+    document.getElementById(
+        "performance"
+    ).innerHTML =
+        performance;
+
+
+    /* Mark Sheet */
+
+    document.getElementById(
+        "outMaths"
+    ).innerHTML = maths;
+
+    document.getElementById(
+        "outProgramming"
+    ).innerHTML = programming;
+
+    document.getElementById(
+        "outDS"
+    ).innerHTML = ds;
+
+    document.getElementById(
+        "outCN"
+    ).innerHTML = cn;
+
+    document.getElementById(
+        "outCloud"
+    ).innerHTML = cloud;
+
+
+    document.getElementById(
+        "studentInfo"
+    ).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
